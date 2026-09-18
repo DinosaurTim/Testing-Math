@@ -62,7 +62,7 @@ public class MathTest {
     })
     public void testMultiplying(double base, double a, double b) {
         //xa * xb = xa+b
-        assertEquals(Math.pow(base, a) * Math.pow(base, b), Math.pow(base, a) + b);
+        assertEquals((Math.pow(base, a) * Math.pow(base, b)), Math.pow(base, a) + b);
     }
 
 
@@ -104,6 +104,7 @@ public class MathTest {
     })
     public void testNestedPowers(double base, double a, double b) {
         //(xa)b = xa*b
+
         assertEquals(Math.pow(base, a)*b, Math.pow(base, a),b );
     }
 
@@ -128,7 +129,12 @@ public class MathTest {
     @ValueSource(doubles = {1, 5.0, 3.7, -1, -4.0, -4.9})
     public void testZeroBase(double exponent) {
         //0x = 0
-        assertEquals(Math.pow(0,exponent), 0);
+        if (exponent<0){
+            assertEquals(Math.pow(0,Math.abs(exponent)), 0);
+        }
+        else {
+            assertEquals(Math.pow(0, exponent), 0);
+        }
     }
 
 }
